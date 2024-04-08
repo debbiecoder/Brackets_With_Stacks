@@ -7,7 +7,14 @@
 
 import Foundation
 
-var inputBrackets = "{[(])}]"
+//var inputBrackets = "{([3*(2+4)]+5}/12"
+var inputBrackets = String("")
+print("Enter expression", terminator: "")
+if let expression = readLine()
+{
+    inputBrackets = String(expression)
+}
+
 var bracketsList = Array(inputBrackets)
 var lenBrackets = inputBrackets.count
 var yesesAndNos: [String] = []
@@ -15,13 +22,14 @@ var yesesAndNos: [String] = []
 let openBrackets: [Character] = ["{", "[", "("]
 let closedBrackets: [Character] = ["}", "]", ")"]
 let openCloseBrackets: [Character: Character] = ["{":"}", "[":"]", "(":")"]
+let allBrackets: [Character] = ["{", "[", "(", ")", "]", "}"]
 
 
 var stack: [Character] = []
 func push(_ element: Character)
 {
     stack.append(element)
-    print(stack)
+//    print(stack)
 }
 func pop() -> Character?
 {
@@ -38,26 +46,29 @@ func pop() -> Character?
 
 for i in 0...lenBrackets - 1
 {
-    if openBrackets.contains(String(bracketsList[i])) == true
+    if allBrackets.contains(String(bracketsList[i])) == true
     {
-        push(bracketsList[i])
-    }
-    else
-    {
-        if let remove = pop()
+        if openBrackets.contains(String(bracketsList[i])) == true
         {
-            if openCloseBrackets[remove] == bracketsList[i]
+            push(bracketsList[i])
+        }
+        else
+        {
+            if let remove = pop()
             {
-                yesesAndNos.append("yes")
+                if openCloseBrackets[remove] == bracketsList[i]
+                {
+                    yesesAndNos.append("yes")
+                }
+                else
+                {
+                    yesesAndNos.append("no")
+                }
             }
             else
             {
                 yesesAndNos.append("no")
             }
-        }
-        else
-        {
-            yesesAndNos.append("no")
         }
     }
 }
