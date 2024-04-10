@@ -16,7 +16,7 @@ if let expression = readLine()
 }
 
 var bracketsList = Array(inputBrackets)
-var lenBrackets = inputBrackets.count
+let lenBrackets = inputBrackets.count
 var yesesAndNos: [String] = []
 
 let openBrackets: [Character] = ["{", "[", "("]
