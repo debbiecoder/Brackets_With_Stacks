@@ -18,7 +18,7 @@ if let expression = readLine()
 var bracketsList = Array(inputBrackets)
 let lenBrackets = inputBrackets.count
 var yesesAndNos: [String] = []
-var numOfBrackets = 0
+var removed = 0
 
 let openBrackets: [Character] = ["{", "[", "("]
 let closedBrackets: [Character] = ["}", "]", ")"]
@@ -49,7 +49,6 @@ for i in 0...lenBrackets - 1
 {
     if openBrackets.contains(String(bracketsList[i])) == true || closedBrackets.contains(String(bracketsList[i])) == true
     {
-        numOfBrackets += 1
         if openBrackets.contains(String(bracketsList[i])) == true
         {
             push(bracketsList[i])
@@ -58,6 +57,7 @@ for i in 0...lenBrackets - 1
         {
             if let remove = pop()
             {
+                removed += 1
                 if openCloseBrackets[remove] == bracketsList[i]
                 {
                     yesesAndNos.append("yes")
@@ -74,7 +74,7 @@ for i in 0...lenBrackets - 1
         }
     }
 }
-if numOfBrackets == 1
+if removed == 0
 {
     yesesAndNos.append("no")
 }
