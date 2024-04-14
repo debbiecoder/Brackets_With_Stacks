@@ -17,7 +17,6 @@ if let expression = readLine()
 
 var bracketsList = Array(inputBrackets)
 let lenBrackets = inputBrackets.count
-var removed = 0
 
 let openBrackets: [Character] = ["{", "[", "("]
 let closedBrackets: [Character] = ["}", "]", ")"]
@@ -44,7 +43,7 @@ func pop() -> Character?
 }
 
 
-for i in 0...lenBrackets - 1
+for i in 0..<lenBrackets
 {
     if openBrackets.contains(String(bracketsList[i])) == true || closedBrackets.contains(String(bracketsList[i])) == true
     {
@@ -56,7 +55,6 @@ for i in 0...lenBrackets - 1
         {
             if let remove = pop()
             {
-                removed += 1
                 if openCloseBrackets[remove] != bracketsList[i]
                 {
                     print("It is not balanced")
@@ -71,7 +69,8 @@ for i in 0...lenBrackets - 1
         }
     }
 }
-if removed == 0
+var stackLength = stack.count
+if stackLength != 0
 {
     print("It is not balanced")
     exit(0)
