@@ -18,11 +18,12 @@ if let expression = readLine()
 var bracketsList = Array(inputBrackets)
 let lenBrackets = inputBrackets.count
 var yesesAndNos: [String] = []
+var numOfBrackets = 0
 
 let openBrackets: [Character] = ["{", "[", "("]
 let closedBrackets: [Character] = ["}", "]", ")"]
 let openCloseBrackets: [Character: Character] = ["{":"}", "[":"]", "(":")"]
-let allBrackets: [Character] = ["{", "[", "(", ")", "]", "}"]
+//let allBrackets: [Character] = ["{", "[", "(", ")", "]", "}"]
 
 
 var stack: [Character] = []
@@ -46,8 +47,9 @@ func pop() -> Character?
 
 for i in 0...lenBrackets - 1
 {
-    if allBrackets.contains(String(bracketsList[i])) == true
+    if openBrackets.contains(String(bracketsList[i])) == true || closedBrackets.contains(String(bracketsList[i])) == true
     {
+        numOfBrackets += 1
         if openBrackets.contains(String(bracketsList[i])) == true
         {
             push(bracketsList[i])
@@ -72,6 +74,10 @@ for i in 0...lenBrackets - 1
         }
     }
 }
+if numOfBrackets == 1
+{
+    yesesAndNos.append("no")
+}
 if yesesAndNos.contains("no") == false
 {
     print("It is balanced")
@@ -80,3 +86,4 @@ else
 {
     print("It is not balanced")
 }
+
